@@ -59,6 +59,17 @@ pipeline {
             }
         }
 
+        stage('Trigger the Deploy') {
+            when {
+                expression {
+                    params.deploy
+                }
+            }
+            steps {
+                build job: "backend-cd", parameters: [string(name: "image_version", value: "${app_version}"), string(name: "env_name", value: "dev")], wait: false
+            }
+        }
+
     }
 
     post {
