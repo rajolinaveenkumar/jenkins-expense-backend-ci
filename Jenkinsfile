@@ -13,7 +13,10 @@ pipeline {
     }
 
     parameters {
+        booleanParam(name: 'BuildImage', defaultValue: false, description: 'Please check the box to build the image')
+
         booleanParam(name: 'deploy', defaultValue: false, description: 'Select to deploy or not')
+
     }
 
     options {
@@ -36,6 +39,11 @@ pipeline {
         }
 
         stage('Build image') {
+            when {
+                expression {
+                    params.BuildImage
+                }
+            }
             steps {
                 withAWS(region: 'us-east-1', credentials: 'aws-creds') {
                     sh """
