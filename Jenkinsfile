@@ -8,7 +8,8 @@ pipeline {
         environmet = 'dev'
         component = 'backend'
         app_version = ''
-        acc_id = 343430925817
+        acc_id = '343430925817'
+        region: 'us-east-1'
     }
 
     parameters {
@@ -33,6 +34,23 @@ pipeline {
 
             }
         }
+
+        stage('Build image') {
+            steps {
+                withAWS(region: 'us-east-1', credentials: 'aws-creds') {
+                    sh """
+                        aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 343430925817.dkr.ecr.us-east-1.amazonaws.com
+                        
+                        docker build -t ${acc_id}.dkr.ecr.${region}.amazonaws.com/expense-dev/backend:${app_version} .
+
+                        docker images
+
+                        docker push ${acc_id}.dkr.ecr.${region}.amazonaws.com/expense-dev/backend:${app_version}
+                    """
+                }
+            }
+        }
+
     }
 
     post {
