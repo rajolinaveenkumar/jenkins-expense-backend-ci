@@ -5,11 +5,11 @@ pipeline {
 
     environment {
         poroject = 'expense'
-        environmet = 'dev'
+        env_name = 'dev'
         component = 'backend'
         app_version = ''
         acc_id = '343430925817'
-        region: 'us-east-1'
+        region = 'us-east-1'
     }
 
     parameters {
