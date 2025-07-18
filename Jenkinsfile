@@ -39,7 +39,7 @@ pipeline {
         }
 
         stage('SonarQube') {
-            environmet {
+            environment {
                 SCANNER_HOME = tool 'sonar-7.0'
             }
 
