@@ -38,6 +38,18 @@ pipeline {
             }
         }
 
+        stage('SonarQube') {
+            environmet {
+                SCANNER_HOME = tool 'sonar-7.0'
+            }
+
+            steps {
+                withSonarQubeEnv('sonar-7.0') {
+                    sh "$SCANNER_HOME/bin/sonar-scanner"
+                }
+            }
+        }
+
         stage('Build image') {
             when {
                 expression {
