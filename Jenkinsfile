@@ -5,7 +5,8 @@ def configmap = [
     env : 'dev',
     component : 'backend',
     acc_id : '343430925817',
-    region : 'us-east-1'
+    region : 'us-east-1',
+    label : 'agent-1-label'
     
 ]
 
