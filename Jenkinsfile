@@ -19,7 +19,7 @@ else{
 }
 
 
-//  Fix It: Use colons (:) instead of equals (:)
+//  Fix It: Use colons (:) instead of equals (=)
 
 
 
